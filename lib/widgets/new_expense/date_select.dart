@@ -40,6 +40,7 @@ class _DateSelectState extends State<DateSelect> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(widget.date == null ? 'No date selected' : Constants.kDateFormatter.format(widget.date!)),
         Padding(
