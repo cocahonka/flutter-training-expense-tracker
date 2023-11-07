@@ -1,5 +1,9 @@
 import 'package:expense_tracker_repeat/models/category.dart';
 import 'package:expense_tracker_repeat/models/expense.dart';
+import 'package:expense_tracker_repeat/widgets/new_expense/amount_input.dart';
+import 'package:expense_tracker_repeat/widgets/new_expense/category_select.dart';
+import 'package:expense_tracker_repeat/widgets/new_expense/date_select.dart';
+import 'package:expense_tracker_repeat/widgets/new_expense/title_input.dart';
 import 'package:flutter/material.dart';
 
 class NewExpense extends StatefulWidget {
@@ -50,8 +54,35 @@ class _NewExpenseState extends State<NewExpense> {
         child: SingleChildScrollView(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth > 600) {
-                return Placeholder();
+              if (constraints.maxWidth <= 600) {
+                return Column(
+                  children: [
+                    TitleInput(_titleController),
+                    Row(
+                      children: [
+                        Expanded(child: AmountInput(_amountController)),
+                        Expanded(child: DateSelect(_selectedDate, onDateChanged: _setDate)),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Row(
+                        children: [
+                          CategorySelect(_selectedCategory, onCategoryChanged: _setCategory),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancel'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Save Expense'),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                );
               } else {
                 return Placeholder();
               }
