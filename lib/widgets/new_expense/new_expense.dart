@@ -29,6 +29,12 @@ class _NewExpenseState extends State<NewExpense> {
 
   void _showDatePickerModal() {}
 
+  void _setCategory(Category category) {
+    setState(() {
+      _selectedCategory = category;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final keyboardSize = MediaQuery.of(context).viewInsets.bottom;
