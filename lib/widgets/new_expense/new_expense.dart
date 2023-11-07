@@ -27,11 +27,15 @@ class _NewExpenseState extends State<NewExpense> {
     super.dispose();
   }
 
-  void _showDatePickerModal() {}
-
   void _setCategory(Category category) {
     setState(() {
       _selectedCategory = category;
+    });
+  }
+
+  void _setDate(DateTime date) {
+    setState(() {
+      _selectedDate = date;
     });
   }
 
