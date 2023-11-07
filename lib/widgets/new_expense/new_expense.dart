@@ -43,6 +43,54 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  void _confirmInputData() {
+    final title = _titleController.text.trim();
+    final amount = double.tryParse(_amountController.text);
+
+    final isTitleInvalid = title.isEmpty;
+    final isAmountInvalid = amount == null;
+    final isDateInvalid = _selectedDate == null;
+
+    if (isTitleInvalid || isAmountInvalid || isDateInvalid) {
+      showDialog<void>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.close, color: Colors.red),
+                Padding(
+                  padding: EdgeInsets.only(left: 6),
+                  child: Text('Oops...'),
+                ),
+              ],
+            ),
+            content: const Text('Check if the title, amout, date and category is selected and input correctly!'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
+              ),
+            ],
+          );
+        },
+      );
+
+      return;
+    }
+
+    final expense = Expense(
+      title: title,
+      amount: amount,
+      date: _selectedDate!,
+      category: _selectedCategory,
+    );
+
+    widget.saveNewExpense(expense);
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final keyboardSize = MediaQuery.of(context).viewInsets.bottom;
@@ -75,7 +123,7 @@ class _NewExpenseState extends State<NewExpense> {
                             child: const Text('Cancel'),
                           ),
                           ElevatedButton(
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: _confirmInputData,
                             child: const Text('Save Expense'),
                           ),
                         ],
