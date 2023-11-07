@@ -2,6 +2,7 @@ import 'package:expense_tracker_repeat/models/category.dart';
 import 'package:expense_tracker_repeat/models/expense.dart';
 import 'package:expense_tracker_repeat/widgets/chart/chart.dart';
 import 'package:expense_tracker_repeat/widgets/list/expenses_list.dart';
+import 'package:expense_tracker_repeat/widgets/new_expense/new_expense.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesScreen extends StatefulWidget {
@@ -58,6 +59,19 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     });
   }
 
+  void _showExpenseAdderModal() {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      builder: (context) {
+        return NewExpense(
+          saveNewExpense: _addExpense,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +79,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         title: const Text('Flutter Expense Tracker'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _showExpenseAdderModal,
             icon: const Icon(Icons.add),
           ),
         ],
