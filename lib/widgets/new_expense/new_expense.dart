@@ -97,82 +97,79 @@ class _NewExpenseState extends State<NewExpense> {
 
     return Padding(
       padding: EdgeInsets.fromLTRB(16, 16, 16, 16 + keyboardSize),
-      child: SizedBox(
-        height: double.infinity,
-        child: SingleChildScrollView(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              if (constraints.maxWidth <= 600) {
-                return Column(
-                  children: [
-                    TitleInput(_titleController),
-                    Row(
+      child: SingleChildScrollView(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth <= 600) {
+              return Column(
+                children: [
+                  TitleInput(_titleController),
+                  Row(
+                    children: [
+                      Expanded(child: AmountInput(_amountController)),
+                      Expanded(child: DateSelect(_selectedDate, onDateChanged: _setDate)),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Row(
                       children: [
-                        Expanded(child: AmountInput(_amountController)),
-                        Expanded(child: DateSelect(_selectedDate, onDateChanged: _setDate)),
+                        CategorySelect(_selectedCategory, onCategoryChanged: _setCategory),
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Cancel'),
+                        ),
+                        ElevatedButton(
+                          onPressed: _confirmInputData,
+                          child: const Text('Save Expense'),
+                        ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Row(
-                        children: [
-                          CategorySelect(_selectedCategory, onCategoryChanged: _setCategory),
-                          const Spacer(),
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('Cancel'),
-                          ),
-                          ElevatedButton(
-                            onPressed: _confirmInputData,
-                            child: const Text('Save Expense'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return Column(
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ],
+              );
+            } else {
+              return Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: TitleInput(_titleController)),
+                      const SizedBox(width: 16),
+                      Expanded(child: AmountInput(_amountController)),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Row(
                       children: [
-                        Expanded(child: TitleInput(_titleController)),
-                        const SizedBox(width: 16),
-                        Expanded(child: AmountInput(_amountController)),
+                        CategorySelect(_selectedCategory, onCategoryChanged: _setCategory),
+                        const Spacer(),
+                        DateSelect(_selectedDate, onDateChanged: _setDate),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Row(
-                        children: [
-                          CategorySelect(_selectedCategory, onCategoryChanged: _setCategory),
-                          const Spacer(),
-                          DateSelect(_selectedDate, onDateChanged: _setDate),
-                        ],
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Cancel'),
+                        ),
+                        ElevatedButton(
+                          onPressed: _confirmInputData,
+                          child: const Text('Save Expense'),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('Cancel'),
-                          ),
-                          ElevatedButton(
-                            onPressed: _confirmInputData,
-                            child: const Text('Save Expense'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
+                  ),
+                ],
+              );
+            }
+          },
         ),
       ),
     );

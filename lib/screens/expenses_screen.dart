@@ -63,6 +63,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
+      constraints: const BoxConstraints.expand(),
       useSafeArea: true,
       builder: (context) {
         return NewExpense(
