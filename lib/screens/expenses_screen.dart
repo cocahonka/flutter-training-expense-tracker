@@ -13,7 +13,6 @@ class ExpensesScreen extends StatefulWidget {
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
-  // TODO(cocahonka): Remove mock values.
   final List<Expense> _expenses = [
     Expense(
       title: 'Flutter course',
@@ -26,6 +25,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       amount: 15.69,
       date: DateTime.now(),
       category: Category.leisure,
+    ),
+    Expense(
+      title: 'Hamburger',
+      amount: 5.89,
+      date: DateTime.now(),
+      category: Category.food,
+    ),
+    Expense(
+      title: 'Syktyvkar',
+      amount: 60.67,
+      date: DateTime.now(),
+      category: Category.travel,
     ),
   ];
 
