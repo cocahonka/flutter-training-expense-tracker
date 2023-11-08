@@ -22,10 +22,11 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: Theme.of(context).cardTheme.margin!,
       child: Container(
-        height: 180,
+        height: width <= 600 ? 180 : 360,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
