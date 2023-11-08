@@ -13,7 +13,7 @@ extension Constants on Never {
     seedColor: const Color.fromARGB(255, 54, 244, 120),
   );
 
-  static final kBaseTheme = ThemeData().copyWith(
+  static final kBaseLightTheme = ThemeData().copyWith(
     useMaterial3: true,
     textTheme: GoogleFonts.latoTextTheme(
       ThemeData().textTheme.copyWith(
@@ -25,10 +25,22 @@ extension Constants on Never {
     ),
   );
 
-  static final kLightTheme = kBaseTheme.copyWith(
+  static final kBaseDarkTheme = ThemeData.dark().copyWith(
+    useMaterial3: true,
+    textTheme: GoogleFonts.latoTextTheme(
+      ThemeData().textTheme.copyWith(
+            titleLarge: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+    ),
+  );
+
+  static final kLightTheme = kBaseLightTheme.copyWith(
     colorScheme: kColorScheme,
-    textTheme: kBaseTheme.textTheme.copyWith(
-      titleLarge: kBaseTheme.textTheme.titleLarge!.copyWith(
+    textTheme: kBaseLightTheme.textTheme.copyWith(
+      titleLarge: kBaseLightTheme.textTheme.titleLarge!.copyWith(
         color: kColorScheme.onSecondaryContainer,
       ),
     ),
@@ -47,10 +59,10 @@ extension Constants on Never {
     ),
   );
 
-  static final kDarkTheme = kBaseTheme.copyWith(
+  static final kDarkTheme = kBaseDarkTheme.copyWith(
     colorScheme: kDarkColorScheme,
-    textTheme: kBaseTheme.textTheme.copyWith(
-      titleLarge: kBaseTheme.textTheme.titleLarge!.copyWith(
+    textTheme: kBaseDarkTheme.textTheme.copyWith(
+      titleLarge: kBaseDarkTheme.textTheme.titleLarge!.copyWith(
         color: kDarkColorScheme.onSecondaryContainer,
       ),
     ),
