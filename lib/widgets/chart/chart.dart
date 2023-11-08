@@ -1,12 +1,24 @@
+import 'dart:math';
+
 import 'package:expense_tracker_repeat/models/category.dart';
 import 'package:expense_tracker_repeat/models/expense.dart';
+import 'package:expense_tracker_repeat/models/expense_bucket.dart';
 import 'package:expense_tracker_repeat/widgets/chart/chart_item.dart';
 import 'package:flutter/material.dart';
 
 class Chart extends StatelessWidget {
-  const Chart(this.expenses, {super.key});
+  Chart(this.expenses, {super.key});
 
   final List<Expense> expenses;
+  late final buckets = Category.values
+      .map(
+        (category) => ExpenseBucket(
+          category: category,
+          expenses: expenses,
+        ),
+      )
+      .toList();
+  late final double maxAmount = buckets.fold(0, (maxAmount, bucket) => max(maxAmount, bucket.totalAmount));
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +39,11 @@ class Chart extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: Category.values.map((category) {
-            return ChartItem(category);
+          children: buckets.map((bucket) {
+            return ChartItem(
+              maxAmount: maxAmount,
+              bucket: bucket,
+            );
           }).toList(),
         ),
       ),

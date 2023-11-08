@@ -1,10 +1,15 @@
-import 'package:expense_tracker_repeat/models/category.dart';
+import 'package:expense_tracker_repeat/models/expense_bucket.dart';
 import 'package:flutter/material.dart';
 
 class ChartItem extends StatelessWidget {
-  const ChartItem(this.category, {super.key});
+  const ChartItem({
+    required this.maxAmount,
+    required this.bucket,
+    super.key,
+  });
 
-  final Category category;
+  final double maxAmount;
+  final ExpenseBucket bucket;
 
   @override
   Widget build(BuildContext context) {
