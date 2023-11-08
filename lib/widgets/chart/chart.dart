@@ -25,7 +25,8 @@ class Chart extends StatelessWidget {
     return Padding(
       padding: Theme.of(context).cardTheme.margin!,
       child: Container(
-        height: 200,
+        height: 180,
+        width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
@@ -37,14 +38,20 @@ class Chart extends StatelessWidget {
             ],
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: buckets.map((bucket) {
-            return ChartItem(
-              maxAmount: maxAmount,
-              bucket: bucket,
-            );
-          }).toList(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: buckets.map((bucket) {
+              return Expanded(
+                child: ChartItem(
+                  fill: maxAmount == 0 ? 0 : bucket.totalAmount / maxAmount,
+                  category: bucket.category,
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
