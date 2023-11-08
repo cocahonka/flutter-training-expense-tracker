@@ -128,11 +128,48 @@ class _NewExpenseState extends State<NewExpense> {
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 );
               } else {
-                return Placeholder();
+                return Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: TitleInput(_titleController)),
+                        const SizedBox(width: 16),
+                        Expanded(child: AmountInput(_amountController)),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Row(
+                        children: [
+                          CategorySelect(_selectedCategory, onCategoryChanged: _setCategory),
+                          const Spacer(),
+                          DateSelect(_selectedDate, onDateChanged: _setDate),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancel'),
+                          ),
+                          ElevatedButton(
+                            onPressed: _confirmInputData,
+                            child: const Text('Save Expense'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
               }
             },
           ),
