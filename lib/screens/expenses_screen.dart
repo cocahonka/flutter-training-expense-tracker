@@ -88,7 +88,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       body: Center(
         child: Column(
           children: [
-            const Chart(),
+            Chart(_expenses),
             Expanded(
               child: ExpensesList(
                 _expenses,
